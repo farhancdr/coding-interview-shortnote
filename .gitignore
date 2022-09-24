@@ -37,3 +37,7 @@ fox.cpp
 # files to ignore
 jsTest.js
 tempCodeRunnerFile.cpp
+
+#file pattern to ignore
+*.ignore.*
+*.ignr.*
