@@ -30,10 +30,7 @@ class CarBuilder {
 
 const carBuilder = new CarBuilder();
 const car = carBuilder.addDoors(4).paint('blue').result();
-console.log(car);
-
-//Output
-//Car { doors: 4, state: 'brand new', color: 'blue' }
+console.log(car); // Car { doors: 4, state: 'brand new', color: 'blue' }
 
 
 //Factory Pattern in JavaScript
@@ -70,12 +67,9 @@ class AnimalFactory {
 const animalFactory = new AnimalFactory();
 const dog = animalFactory.createAnimal('dog');
 const cat = animalFactory.createAnimal('cat');
-console.log(dog.bark());
-console.log(cat.meow());
+console.log(dog.bark()); // Woof!
+console.log(cat.meow()); // Meow!
 
-//Output
-//Woof!
-//Meow!
 
 //Prototype Pattern in JavaScript
 //Prototype Pattern is a creational design pattern that allows cloning objects, even complex ones, without coupling to their specific classes.
@@ -126,14 +120,10 @@ const teslaFactory = new TeslaFactory();
 const modelS = teslaFactory.create('S');
 const modelX = teslaFactory.create('X');
 const model3 = teslaFactory.create('3');
-console.log(modelS.price());
-console.log(modelX.price());
-console.log(model3.price());
+console.log(modelS.price()); // Price is $70,000
+console.log(modelX.price()); // Price is $80,000
+console.log(model3.price()); // Price is $35,000
 
-//Output
-//Price is $70,000
-//Price is $80,000
-//Price is $35,000
 
 //Singleton Pattern in JavaScript
 //Singleton Pattern is a creational design pattern that lets you ensure that a class has only one instance, while providing a global access point to this instance.
@@ -159,14 +149,11 @@ class Tesla {
 
 const tesla = new Tesla();
 tesla.setPrice(40000);
-console.log(tesla.getPrice());
+console.log(tesla.getPrice()); // 40000
 
 const tesla2 = new Tesla();
-console.log(tesla2.getPrice());
+console.log(tesla2.getPrice()); // 40000
 
-//Output
-//40000
-//40000
 
 //Adapter Pattern in JavaScript
 //Adapter Pattern is a structural design pattern that allows objects with incompatible interfaces to collaborate.
@@ -215,18 +202,14 @@ class CalcAdapter {
 }
 
 const oldCalc = new OldCalculator();
-console.log(oldCalc.operations(10, 5, 'add'));
+console.log(oldCalc.operations(10, 5, 'add')); // 15
 
 const newCalc = new NewCalculator();
-console.log(newCalc.add(10, 5));
+console.log(newCalc.add(10, 5)); // 15
 
 const adaptedCalc = new CalcAdapter();
-console.log(adaptedCalc.operations(10, 5, 'add'));
+console.log(adaptedCalc.operations(10, 5, 'add')); // 15
 
-//Output
-//15
-//15
-//15
 
 //Decorator Pattern in JavaScript
 //Decorator Pattern is a structural design pattern that lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors.
@@ -256,19 +239,13 @@ function azure(server) {
 }
 
 const s1 = aws(new Server('10.10.10.10', 8080));
-console.log(s1.isAWS);
-console.log(s1.awsInfo());
+console.log(s1.isAWS); // true
+console.log(s1.awsInfo()); // https://10.10.10.10:8080
 
-const s2 = azure(new Server('10.20.20.20', 1000));
-console.log(s2.isAzure);
-console.log(s2.url);
+const s2 = azure(new Server('10.20.20.20', 1500));
+console.log(s2.isAzure); // true
+console.log(s2.url); // https://10.20.20.20:1500
 
-//Output
-//true
-//https://
-//
-//true
-//https://
 
 //Facade Pattern in JavaScript
 //Facade Pattern is a structural design pattern that provides a simplified interface to a library, a framework, or any other complex set of classes.
@@ -314,12 +291,9 @@ class ComplaintRegistry {
 
 const registry = new ComplaintRegistry();
 
-console.log(registry.register('Vladilen', 'service', 'недоступен'));
-console.log(registry.register('Elena', 'product', 'вылазит ошибка'));
+console.log(registry.register('Vladilen', 'service', 'недоступен')); // Service: 1610612736000: Vladilen (недоступен)
+console.log(registry.register('Elena', 'product', 'вылазит ошибка')); // Product: 1610612736001: Elena (вылазит ошибка)
 
-//Output
-//Service: 1582020000000: Vladilen (недоступен)
-//Product: 1582020000001: Elena (вылазит ошибка)
 
 //Proxy Pattern in JavaScript
 //Proxy Pattern is a structural design pattern that lets you provide a substitute or placeholder for another object. A proxy controls access to the original object, allowing you to perform something either before or after the request gets through to the original object.
@@ -473,8 +447,3 @@ myCar.add(new Tools());
 
 console.log(myCar.getPrice()); //7400
 console.log(myCar.getName()); //Audi
-
-//Output
-//7400
-//Audi
-
