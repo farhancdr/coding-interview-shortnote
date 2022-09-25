@@ -44,22 +44,15 @@ TreeNode* postorder(TreeNode* root) {
     return root;
 }
 
-//get the minimum value in the binary tree
-TreeNode* minValue(TreeNode* root) {
-    if(root == nullptr) return nullptr;
-    while(root->left != nullptr) root = root->left;
-    return root;
+// search in binary tree
+bool search(TreeNode* root, int val) {
+    if(root == nullptr) return false;
+    if(root->val == val) return true;
+    if(val < root->val) return search(root->left, val);
+    return search(root->right, val);
 }
 
-//get the maximum value in the binary tree
-TreeNode* maxValue(TreeNode* root) {
-    if(root == nullptr) return nullptr;
-    while(root->right != nullptr) root = root->right;
-    return root;
-}
-
-//delete a node from the binary tree
-
+// delete from binary tree
 TreeNode* deleteNode(TreeNode* root, int val) {
     if(root == nullptr) return nullptr;
     if(val < root->val) root->left = deleteNode(root->left, val);
@@ -75,10 +68,49 @@ TreeNode* deleteNode(TreeNode* root, int val) {
             delete root;
             return temp;
         }
-        TreeNode* temp = minValue(root->right);
-        root->val = temp->val;
-        root->right = deleteNode(root->right, temp->val);
+        else {
+            TreeNode* temp = root->right;
+            while(temp->left != nullptr) temp = temp->left;
+            root->val = temp->val;
+            root->right = deleteNode(root->right, temp->val);
+        }
     }
+    return root;
+}
+
+//print left view of binary tree
+void leftView(TreeNode* root, int level, int &maxLevel) {
+    if(root == nullptr) return;
+    if(level > maxLevel) {
+        cout << root->val << " ";
+        maxLevel = level;
+    }
+    leftView(root->left, level+1, maxLevel);
+    leftView(root->right, level+1, maxLevel);
+}
+
+//print right view of binary tree
+void rightView(TreeNode* root, int level, int &maxLevel) {
+    if(root == nullptr) return;
+    if(level > maxLevel) {
+        cout << root->val << " ";
+        maxLevel = level;
+    }
+    rightView(root->right, level+1, maxLevel);
+    rightView(root->left, level+1, maxLevel);
+}
+
+//get the minimum value in the binary tree
+TreeNode* minValue(TreeNode* root) {
+    if(root == nullptr) return nullptr;
+    while(root->left != nullptr) root = root->left;
+    return root;
+}
+
+//get the maximum value in the binary tree
+TreeNode* maxValue(TreeNode* root) {
+    if(root == nullptr) return nullptr;
+    while(root->right != nullptr) root = root->right;
     return root;
 }
 
@@ -130,19 +162,99 @@ TreeNode* invertTree(TreeNode* root) {
 }
 
 //check a tree is symmetric or not
-
-bool isSymmetricTest(TreeNode* p , TreeNode* q){
+bool isSymmetric(TreeNode* p , TreeNode* q){
     if(p == NULL && q == NULL) //left & right node is NULL 
         return true; 
     else if(p == NULL || q == NULL) //one of them is Not NULL
         return false; 
     else if(p->val!=q->val) 
         return false;
-    return isSymmetricTest(p->left,q->right) && isSymmetricTest(p->right,q->left); //comparing left subtree's left child with right subtree's right child --AND-- comparing left subtree's right child with right subtree's left child
+    return isSymmetric(p->left,q->right) && isSymmetric(p->right,q->left); //comparing left subtree's left child with right subtree's right child --AND-- comparing left subtree's right child with right subtree's left child
 }
 bool isSymmetric(TreeNode* root) {
     if(root==NULL) return true; //Tree is empty
-    return isSymmetricTest(root->left,root->right);
+    return isSymmetric(root->left,root->right);
+}
+
+//check a tree is balanced or not
+bool isBalanced(TreeNode* root) {
+    if(root == nullptr) return true;
+    int lh = height(root->left);
+    int rh = height(root->right);
+    return abs(lh-rh) <= 1 && isBalanced(root->left) && isBalanced(root->right);
+}
+
+//check a tree is complete or not
+bool isComplete(TreeNode* root) {
+    if(root == nullptr) return true;
+    queue<TreeNode*> q;
+    q.push(root);
+    bool flag = false;
+    while(!q.empty()) {
+        TreeNode* temp = q.front();
+        q.pop();
+        if(temp->left) {
+            if(flag) return false;
+            q.push(temp->left);
+        }
+        else flag = true;
+        if(temp->right) {
+            if(flag) return false;
+            q.push(temp->right);
+        }
+        else flag = true;
+    }
+    return true;
+}
+
+//check a tree is perfect or not
+bool isPerfect(TreeNode* root) {
+    if(root == nullptr) return true;
+    queue<TreeNode*> q;
+    q.push(root);
+    while(!q.empty()) {
+        int size = q.size();
+        for(int i=0; i<size; i++) {
+            TreeNode* temp = q.front();
+            q.pop();
+            if(temp->left) q.push(temp->left);
+            if(temp->right) q.push(temp->right);
+            if(temp->left == nullptr && temp->right != nullptr) return false;
+            if(temp->left != nullptr && temp->right == nullptr) return false;
+        }
+    }
+    return true;
+}
+
+//check a tree is full or not
+bool isFull(TreeNode* root) {
+    if(root == nullptr) return true;
+    if(root->left == nullptr && root->right == nullptr) return true;
+    if(root->left != nullptr && root->right != nullptr) return isFull(root->left) && isFull(root->right);
+    return false;
+}
+
+// check two trees are isomorphic or not
+bool isIsomorphic(TreeNode* root1, TreeNode* root2) {
+    if(root1 == nullptr && root2 == nullptr) return true;
+    if(root1 == nullptr || root2 == nullptr) return false;
+    if(root1->val != root2->val) return false;
+    return (isIsomorphic(root1->left, root2->left) && isIsomorphic(root1->right, root2->right)) || (isIsomorphic(root1->left, root2->right) && isIsomorphic(root1->right, root2->left));
+}
+
+//check two tree are identical or not
+bool isIdentical(TreeNode* root1, TreeNode* root2) {
+    if(root1 == nullptr && root2 == nullptr) return true;
+    if(root1 == nullptr || root2 == nullptr) return false;
+    return (root1->val == root2->val) && isIdentical(root1->left, root2->left) && isIdentical(root1->right, root2->right);
+}
+
+//check a tree is subtree of another tree or not
+bool isSubtree(TreeNode* root1, TreeNode* root2) {
+    if(root1 == nullptr && root2 == nullptr) return true;
+    if(root1 == nullptr || root2 == nullptr) return false;
+    if(isIdentical(root1, root2)) return true;
+    return isSubtree(root1->left, root2) || isSubtree(root1->right, root2);
 }
 
 //graphical representation of the binary tree
@@ -178,6 +290,7 @@ int main(int argc, const char** argv) {
     root = insert(root, 15);
     root = insert(root, 8);
     root = insert(root, 4);
+
     // deleteNode(root, 8);
     // inorder(root);
  
@@ -187,7 +300,15 @@ int main(int argc, const char** argv) {
     
     // cout<< height(root) << endl;
 
-     isSymmetric(root)?cout<<"YES":cout<<"NO"<< endl;
+    //  isSymmetric(root)?cout<<"YES":cout<<"NO"<< endl;
+
+    // print left view of the binary tree
+    // int maxLevel = 0;
+    // leftView(root, 1, maxLevel);+
+
+    // print right view of the binary tree
+    int maxLevel = 0;
+    rightView(root, 1, maxLevel);
     
     return 0;
 }
