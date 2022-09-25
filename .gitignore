@@ -41,3 +41,6 @@ tempCodeRunnerFile.cpp
 #file pattern to ignore
 *.ignore.*
 *.ignr.*
+
+#node modules
+node_modules

@@ -1,0 +1,24 @@
+{
+  "name": "coding-interview-shortnote",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "merge": "node ./mergeFiles.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/farhancdr/coding-interview-shortnote.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/farhancdr/coding-interview-shortnote/issues"
+  },
+  "homepage": "https://github.com/farhancdr/coding-interview-shortnote#readme",
+  "dependencies": {
+    "async": "^3.2.4"
+  }
+}
