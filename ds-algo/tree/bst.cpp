@@ -242,13 +242,6 @@ bool isIsomorphic(TreeNode* root1, TreeNode* root2) {
     return (isIsomorphic(root1->left, root2->left) && isIsomorphic(root1->right, root2->right)) || (isIsomorphic(root1->left, root2->right) && isIsomorphic(root1->right, root2->left));
 }
 
-//check two tree are identical or not
-bool isIdentical(TreeNode* root1, TreeNode* root2) {
-    if(root1 == nullptr && root2 == nullptr) return true;
-    if(root1 == nullptr || root2 == nullptr) return false;
-    return (root1->val == root2->val) && isIdentical(root1->left, root2->left) && isIdentical(root1->right, root2->right);
-}
-
 //check a tree is subtree of another tree or not
 bool isSubtree(TreeNode* root1, TreeNode* root2) {
     if(root1 == nullptr && root2 == nullptr) return true;
@@ -281,15 +274,28 @@ void printTree(TreeNode* root) {
 
 int main(int argc, const char** argv) {
 
-    TreeNode* root = NULL;
+    TreeNode* root = nullptr;
     root = insert(root, 5);
-    root = insert(root, 6);
+    root = insert(root, 3);
     root = insert(root, 2);
-    root = insert(root, 10);
-    root = insert(root, -5);
-    root = insert(root, 15);
-    root = insert(root, 8);
     root = insert(root, 4);
+    root = insert(root, 7);
+    root = insert(root, 6);
+    root = insert(root, 8);
+    inorder(root);
+    cout << "\n=================" << endl;
+    preorder(root);
+    cout << "\n=================" << endl;
+    postorder(root);
+    cout << "\n=================" << endl;
+    cout << search(root, 3) << endl;
+    cout << search(root, 9) << endl;
+    root = deleteNode(root, 3);
+    inorder(root);
+    cout << "\n=================" << endl;
+    root = deleteNode(root, 5);
+    inorder(root);
+    cout << "\n=================" << endl;
 
     // deleteNode(root, 8);
     // inorder(root);
