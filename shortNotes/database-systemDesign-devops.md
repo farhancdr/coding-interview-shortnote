@@ -280,3 +280,52 @@ pipeline {
     }
 }
 ```
+
+# Microservices
+- Microservices are a software development technique—a variant of the service-oriented architecture (SOA) architectural style that structures an application as a collection of loosely coupled services.
+- Microservices are small, autonomous services that work together.
+
+## Communication between microservices
+- **REST** is an architectural style for providing standards between computer systems on the web, making it easier for systems to communicate with each other.
+- **SOAP** is a protocol specification for exchanging structured information in the implementation of web services in computer networks.
+- **gRPC** is a modern open source high performance Remote Procedure Call (RPC) framework that can run in any environment.
+- **GraphQL** is a query language for APIs and a runtime for fulfilling those queries with your existing data.
+- **RabbitMQ** is an open-source message-broker software that originally implemented the Advanced Message Queuing Protocol (AMQP).
+- **Apache Kafka** is an open-source stream-processing software platform developed by the Apache Software Foundation, written in Scala and Java.
+
+### RabbitMQ
+- **RabbitMQ** is an open-source message-broker software that originally implemented the Advanced Message Queuing Protocol (AMQP).
+- **Exchange** is a message routing agent that receives messages from producers and pushes them to queues.
+- **Queue** is a buffer that stores messages.
+- **Binding** is a link between an exchange and a queue.
+- **Routing key** is a message attribute used for routing messages to queues.
+- **Virtual host** is an abstraction of an AMQP broker.
+- **Connection** is a network connection between a client and a server.
+- **Channel** is a virtual connection inside a connection.
+- **Message** is a data structure containing headers and a body.
+- **Publisher** is a program that sends messages.
+- **Consumer** is a program that receives messages.
+
+### Apache Kafka
+- **Apache Kafka** is an open-source stream-processing software platform developed by the Apache Software Foundation, written in Scala and Java.
+- **Broker** is a server that stores messages.
+- **Topic** is a category or feed name to which messages are published.
+- **Partition** is an ordered, immutable sequence of messages that is continually appended to a log.
+- **Offset** is a unique identifier of a message within a partition.
+- **Producer** is a program that publishes messages to a topic.
+- **Consumer** is a program that subscribes to a topic and processes the messages it receives.
+
+## Service discovery
+- **Service discovery** is the process of automatically detecting the location of services and their capabilities.
+- **Consul** is a service mesh solution providing a full featured control plane with service discovery, configuration, and segmentation functionality.
+- **Eureka** is a service registry for resilient mid-tier load balancing and failover.
+- **ZooKeeper** is a centralized service for maintaining configuration information, naming, providing distributed synchronization, and providing group services.
+
+## API gateway
+- **API gateway** is a server that acts as the single entry point for all requests from clients to access the microservices.
+- **Kong** is an open-source API gateway and microservices management layer, delivering high performance and reliability.
+
+## Service mesh
+- **Service mesh** is a dedicated infrastructure layer for handling service-to-service communication.
+- **Istio** is an open-source service mesh that layers transparently onto existing distributed applications.
+- **Envoy** is an open-source edge and service proxy, designed for cloud-native applications.
